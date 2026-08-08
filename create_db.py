@@ -1,6 +1,9 @@
-from app import app, db
-# Import models so SQLAlchemy knows what tables to create
-import models 
+﻿from app import app, db
+
+import models
+
+# This script creates all database tables defined by the SQLAlchemy models.
+# Run it once when setting up the project for the first time.
 
 with app.app_context():
     db.create_all()

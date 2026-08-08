@@ -1,6 +1,7 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 
 {% block content %}
+<!-- This page is the administrator's main control panel. -->
 <div class="row mb-4">
     <div class="col-md-8">
         <h2>Admin Dashboard</h2>
@@ -12,7 +13,7 @@
     </div>
 </div>
 
-<!-- Statistics Cards -->
+<!-- Summary cards show key statistics supplied by the backend. -->
 <div class="row mb-5">
     <div class="col-md-3">
         <div class="card text-white bg-primary mb-3">
@@ -42,13 +43,13 @@
         <div class="card text-white bg-info mb-3">
             <div class="card-body">
                 <h5 class="card-title">Total Bookings</h5>
-                <h2 class="card-text">0</h2> <!-- We will link this when we build the Booking model -->
+                <h2 class="card-text">0</h2>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Pending Staff Approvals Table -->
+<!-- This table lists staff members waiting for approval. -->
 <div class="row">
     <div class="col-md-12">
         <h4>Pending Staff Approvals</h4>
@@ -66,8 +67,6 @@
                     <td>{{ staff.id }}</td>
                     <td>{{ staff.username }}</td>
                     <td>
-                        <!-- We will activate these routes in the next step -->
-                        <!-- Replace the old buttons with these -->
                         <a href="/approve_staff/{{ staff.id }}" class="btn btn-sm btn-success">Approve</a>
                         <button class="btn btn-sm btn-danger">Reject</button>
                     </td>
@@ -82,3 +81,4 @@
     </div>
 </div>
 {% endblock %}
+

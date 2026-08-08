@@ -1,6 +1,7 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 
 {% block content %}
+<!-- This page shows the staff member the treks assigned to them and lets them update their status. -->
 <div class="row mb-4">
     <div class="col-md-8">
         <h2>Trek Staff Dashboard</h2>
@@ -22,11 +23,11 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <!-- Left: Trek Details & Status Update -->
+
                     <div class="col-md-6 border-end">
                         <p><strong>Location:</strong> {{ trek.location }}</p>
                         <p><strong>Available Slots Left:</strong> {{ trek.total_slots }}</p>
-                        
+
                         <form method="POST" action="/update_trek_status/{{ trek.id }}" class="d-flex align-items-center mt-3">
                             <label class="me-2 fw-bold">Change Status:</label>
                             <select name="status" class="form-select w-50 me-2">
@@ -37,8 +38,7 @@
                             <button type="submit" class="btn btn-sm btn-primary">Update</button>
                         </form>
                     </div>
-                    
-                    <!-- Right: Registered Trekkers -->
+
                     <div class="col-md-6">
                         <h6>Registered Trekkers</h6>
                         <ul class="list-group list-group-flush" style="max-height: 150px; overflow-y: auto;">
@@ -58,3 +58,4 @@
     </div>
 </div>
 {% endblock %}
+

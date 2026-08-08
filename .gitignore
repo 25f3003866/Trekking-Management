@@ -1,0 +1,11 @@
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Flask instance folder & SQLite database
+instance/
+*.db
+
+# Virtual Environment
+venv/
+.venv/

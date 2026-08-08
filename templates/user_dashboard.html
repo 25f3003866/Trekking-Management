@@ -1,6 +1,7 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 
 {% block content %}
+<!-- This page lets trekkers browse available treks, search by filter, and view their bookings. -->
 <div class="row mb-4">
     <div class="col-md-8">
         <h2>Trekker Dashboard</h2>
@@ -12,11 +13,10 @@
 </div>
 
 <div class="row">
-    <!-- Left Column: Search & Available Treks -->
     <div class="col-md-8">
         <h4>Find a Trek</h4>
-        
-        <!-- Search/Filter Form -->
+
+        <!-- The search form sends filters to the dashboard route through the URL query string. -->
         <form method="GET" action="/dashboard" class="row g-2 mb-4 bg-light p-3 rounded">
             <div class="col-md-4">
                 <select name="difficulty" class="form-select">
@@ -34,7 +34,6 @@
             </div>
         </form>
 
-        <!-- Available Treks List -->
         <div class="list-group">
             {% for trek in available_treks %}
             <div class="list-group-item d-flex justify-content-between align-items-center">
@@ -42,7 +41,7 @@
                     <h5 class="mb-1">{{ trek.name }}</h5>
                     <small class="text-muted">{{ trek.difficulty }} | {{ trek.location }} | Slots left: {{ trek.total_slots }}</small>
                 </div>
-                <!-- Hide booking button if full -->
+
                 {% if trek.total_slots > 0 %}
                     <a href="/book_trek/{{ trek.id }}" class="btn btn-sm btn-success">Book Now</a>
                 {% else %}
@@ -55,7 +54,6 @@
         </div>
     </div>
 
-    <!-- Right Column: Booking History -->
     <div class="col-md-4">
         <h4>My Bookings</h4>
         <div class="card">
@@ -73,3 +71,4 @@
     </div>
 </div>
 {% endblock %}
+

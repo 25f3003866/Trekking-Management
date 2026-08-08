@@ -1,18 +1,18 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 
 {% block content %}
+<!-- This form lets an admin create a new trek and assign it to approved staff. -->
 <div class="row justify-content-center">
     <div class="col-md-6">
         <h2 class="mb-4">Create a New Trek</h2>
-        
-        <!-- Safety Net: Displays backend errors -->
+
+        <!-- Flash messages appear here if the admin forgets to choose a staff member. -->
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             <div class="alert alert-danger">{{ messages[0] }}</div>
           {% endif %}
         {% endwith %}
 
-        <!-- THE FORM BEGINS -->
         <form method="POST" action="/create_trek">
             <div class="mb-3">
                 <label>Trek Name</label>
@@ -35,7 +35,6 @@
                 <input type="number" name="total_slots" class="form-control" min="1" required>
             </div>
 
-            <!-- STAFF DROPDOWN STRICTLY INSIDE THE FORM -->
             <div class="mb-3">
                 <label>Assign Staff</label>
                 <select name="staff_id" class="form-select" required>
@@ -49,8 +48,8 @@
             <button type="submit" class="btn btn-primary w-100">Create Trek</button>
             <a href="/dashboard" class="btn btn-secondary w-100 mt-2">Cancel</a>
         </form>
-        <!-- THE FORM ENDS -->
-        
+
     </div>
 </div>
 {% endblock %}
+

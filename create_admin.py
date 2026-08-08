@@ -1,18 +1,21 @@
-from app import app, db
+﻿from app import app, db
 import models
 from werkzeug.security import generate_password_hash
 
+# This script creates the default admin account if it does not already exist.
+# It is useful for setting up the project the first time.
+
 with app.app_context():
-    # Check if an admin already exists to prevent duplicates
+    # Check whether an admin user already exists before creating one.
     admin_exists = models.User.query.filter_by(role='admin').first()
-    
+
     if not admin_exists:
-        # Create the superuser
+        # Create the default admin account with a simple starter password.
         admin = models.User(
             username='admin',
-            password=generate_password_hash('admin123'), # Default password
+            password=generate_password_hash('admin123'),
             role='admin',
-            is_approved=True 
+            is_approved=True
         )
         db.session.add(admin)
         db.session.commit()
