@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h2>Admin Dashboard</h2>
+        <a href="/create_trek" class="btn btn-primary mt-2">Create New Trek</a>
+        <p class="text-muted">Welcome back, {{ user.username }}</p>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="/logout" class="btn btn-danger">Logout</a>
+    </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row mb-5">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Treks</h5>
+                <h2 class="card-text">{{ total_treks }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Users</h5>
+                <h2 class="card-text">{{ total_users }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Staff</h5>
+                <h2 class="card-text">{{ total_staff }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Bookings</h5>
+                <h2 class="card-text">0</h2> <!-- We will link this when we build the Booking model -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pending Staff Approvals Table -->
+<div class="row">
+    <div class="col-md-12">
+        <h4>Pending Staff Approvals</h4>
+        <table class="table table-striped mt-3">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for staff in pending_staff %}
+                <tr>
+                    <td>{{ staff.id }}</td>
+                    <td>{{ staff.username }}</td>
+                    <td>
+                        <!-- We will activate these routes in the next step -->
+                        <!-- Replace the old buttons with these -->
+                        <a href="/approve_staff/{{ staff.id }}" class="btn btn-sm btn-success">Approve</a>
+                        <button class="btn btn-sm btn-danger">Reject</button>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3" class="text-center">No pending approvals.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

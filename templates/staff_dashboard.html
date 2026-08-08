@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h2>Trek Staff Dashboard</h2>
+        <p class="text-muted">Welcome to your assignment panel, {{ user.username }}</p>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="/logout" class="btn btn-danger">Logout</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>My Assigned Treks</h4>
+        {% for trek in my_treks %}
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">{{ trek.name }} ({{ trek.difficulty }})</h5>
+                <span class="badge bg-light text-dark">Status: {{ trek.status }}</span>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- Left: Trek Details & Status Update -->
+                    <div class="col-md-6 border-end">
+                        <p><strong>Location:</strong> {{ trek.location }}</p>
+                        <p><strong>Available Slots Left:</strong> {{ trek.total_slots }}</p>
+                        
+                        <form method="POST" action="/update_trek_status/{{ trek.id }}" class="d-flex align-items-center mt-3">
+                            <label class="me-2 fw-bold">Change Status:</label>
+                            <select name="status" class="form-select w-50 me-2">
+                                <option value="Open" {% if trek.status == 'Open' %}selected{% endif %}>Open</option>
+                                <option value="Started" {% if trek.status == 'Started' %}selected{% endif %}>Started</option>
+                                <option value="Completed" {% if trek.status == 'Completed' %}selected{% endif %}>Completed</option>
+                            </select>
+                            <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Right: Registered Trekkers -->
+                    <div class="col-md-6">
+                        <h6>Registered Trekkers</h6>
+                        <ul class="list-group list-group-flush" style="max-height: 150px; overflow-y: auto;">
+                            {% for booking in trek.bookings %}
+                                <li class="list-group-item py-1">{{ booking.user.username }}</li>
+                            {% else %}
+                                <li class="list-group-item py-1 text-muted">No bookings yet.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="alert alert-info">You have not been assigned any treks yet.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
