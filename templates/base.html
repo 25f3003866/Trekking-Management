@@ -20,6 +20,13 @@
         </div>
     </nav>
     <div class="container mt-5">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-info">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <!-- Child templates insert their page-specific content here. -->
         {% block content %}{% endblock %}
     </div>

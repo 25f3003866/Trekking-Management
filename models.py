@@ -10,6 +10,8 @@ class User(db.Model):
     password = db.Column(db.String(100), nullable=False)
     role = db.Column(db.String(20), nullable=False, default='trekker')
     is_approved = db.Column(db.Boolean, default=True)
+    is_blacklisted = db.Column(db.Boolean, default=False)
+    approval_status = db.Column(db.String(20), nullable=False, default='approved')
 
 # Trek model stores the details of each trekking trip.
 class Trek(db.Model):

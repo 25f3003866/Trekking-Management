@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2 class="mb-4">Edit Trek</h2>
+        <form method="POST" action="/edit_trek/{{ trek.id }}">
+            <div class="mb-3">
+                <label>Trek Name</label>
+                <input type="text" name="name" class="form-control" value="{{ trek.name }}" required>
+            </div>
+            <div class="mb-3">
+                <label>Difficulty</label>
+                <select name="difficulty" class="form-select">
+                    <option value="Beginner" {% if trek.difficulty == 'Beginner' %}selected{% endif %}>Beginner</option>
+                    <option value="Moderate" {% if trek.difficulty == 'Moderate' %}selected{% endif %}>Moderate</option>
+                    <option value="Expert" {% if trek.difficulty == 'Expert' %}selected{% endif %}>Expert</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>Location</label>
+                <input type="text" name="location" class="form-control" value="{{ trek.location }}" required>
+            </div>
+            <div class="mb-3">
+                <label>Total Slots</label>
+                <input type="number" name="total_slots" class="form-control" value="{{ trek.total_slots }}" min="1" required>
+            </div>
+            <div class="mb-3">
+                <label>Assign Staff</label>
+                <select name="staff_id" class="form-select">
+                    <option value="">No staff assigned</option>
+                    {% for staff in approved_staff %}
+                        <option value="{{ staff.id }}" {% if trek.staff_id == staff.id %}selected{% endif %}>{{ staff.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+            <a href="/dashboard" class="btn btn-secondary w-100 mt-2">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
